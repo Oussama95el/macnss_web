@@ -3,10 +3,14 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<h1><%= "Hello World! Success" %>
-</h1>
+
+<jsp:include page="components/navbar.jsp" flush="true"/>
 <br/>
+
+
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.simplon.macnss.controller;
 
-import com.simplon.macnss.model.User;
+import com.simplon.macnss.model.person.Person;
 import com.simplon.macnss.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RegisterController {
 
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
     @GetMapping("/register")
     public String index() {
@@ -23,12 +23,12 @@ public class RegisterController {
         return "register";
     }
 
-    @PostMapping("/register")
-    public String register(@Validated  @ModelAttribute User user, BindingResult result) {
+    @PostMapping("/")
+    public String register(@Validated  @ModelAttribute Person person, BindingResult result) {
         if (result.hasErrors()) {
             return "register";
         }
-//        userService.save(user);
+//        userService.save(person);
         return "redirect:/";
     }
 }
