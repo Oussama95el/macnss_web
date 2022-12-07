@@ -7,8 +7,11 @@
 </head>
 <body>
 
-<jsp:include page="components/navbar.jsp" flush="true"/>
-<br/>
+<jsp:include page="components/navbar.jsp" flush="true" />
+
+<div>
+    <img src="" alt="">
+</div>
 
 
 

@@ -1,26 +1,44 @@
 package com.simplon.macnss.controller;
 
-import com.simplon.macnss.service.UserService;
+import com.simplon.macnss.model.person.Agent;
+import com.simplon.macnss.service.AgentServiceImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
 
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private AgentServiceImpl agentServiceImpl;
+
+    @RequestMapping("/agent/login")
+    public String loginAgent(HttpServletRequest request) {
+        System.out.println(request.getContextPath());
+        return "login"; }
+
+    @GetMapping("/login/patient")
+    public String loginPatient() { return "login"; }
 
 
-    @GetMapping("/login")
-    public String index() { return "/views/login"; }
-
-
-    @PostMapping("/login/auth")
-    public String validateLogin() {
-//        TODO : after create login form and service fill this method to validate login if true redirect to user dashboard else redirect to login page
-        return "redirect:/";
+    @PostMapping("/login/agent")
+    public String validateLogin(@Validated @ModelAttribute Agent agent, BindingResult result) {
+        if (result.hasErrors()) {
+            return "login";
+        }
+        if (agentServiceImpl.checkAgentEmail(agent)){
+            if (agentServiceImpl.checkAgentPassword(agent)){
+                return "redirect:/";
+            }else {
+                return "login";
+            }
+        }else {
+            System.out.println("email not found");
+            return "login";
+        }
     }
 
 

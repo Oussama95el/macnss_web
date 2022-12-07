@@ -1,7 +1,10 @@
 package com.simplon.macnss.controller;
 
+import com.simplon.macnss.model.person.Agent;
 import com.simplon.macnss.model.person.Person;
-import com.simplon.macnss.service.UserService;
+import com.simplon.macnss.repository.DossierRespository;
+import com.simplon.macnss.security.HashWithSalt;
+import com.simplon.macnss.service.AgentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,21 +17,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RegisterController {
 
-//    @Autowired
-//    private UserService userService;
+    private final AgentServiceImpl agentServiceImpl;
+    final
+    DossierRespository dossierRespository;
+
+    public RegisterController(DossierRespository dossierRespository , AgentServiceImpl agentServiceImpl) {
+        this.dossierRespository = dossierRespository;
+        this.agentServiceImpl = agentServiceImpl;
+    }
 
     @GetMapping("/register")
     public String index() {
-        System.out.println("register");
         return "register";
     }
 
-    @PostMapping("/")
-    public String register(@Validated  @ModelAttribute Person person, BindingResult result) {
+    @PostMapping("/register/agent")
+    public String register(@Validated @ModelAttribute Agent agent, BindingResult result) {
         if (result.hasErrors()) {
             return "register";
         }
-//        userService.save(person);
+        agentServiceImpl.save(agent);
         return "redirect:/";
     }
 }
