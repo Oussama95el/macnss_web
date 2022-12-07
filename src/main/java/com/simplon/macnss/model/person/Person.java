@@ -19,6 +19,16 @@ public class Person {
     @Column(name = "password", nullable = false)
     private String password;
 
+    private String userType;
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
     public Person(){}
 
     public Person(String email, String username, String password) {

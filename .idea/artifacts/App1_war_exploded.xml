@@ -52,6 +52,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:6.0.2" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:6.0.2" />
           <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.4" />
+          <element id="library" level="project" name="Maven: org.jetbrains:annotations:23.0.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -36,6 +36,9 @@ public class RegisterController {
         if (result.hasErrors()) {
             return "register";
         }
+        // get the agent passord and hash it
+        String password = agent.getPassword();
+        agent.setPassword(HashWithSalt.hashPassword(password));
         agentServiceImpl.save(agent);
         return "redirect:/";
     }

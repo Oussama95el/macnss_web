@@ -9,7 +9,6 @@
 <html>
 <head>
     <title>Title</title>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <h2>User Registration Form</h2>
