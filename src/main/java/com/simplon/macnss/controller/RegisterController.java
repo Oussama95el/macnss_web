@@ -1,29 +1,32 @@
 package com.simplon.macnss.controller;
 
 import com.simplon.macnss.model.person.Agent;
+import com.simplon.macnss.model.person.Patient;
 import com.simplon.macnss.model.person.Person;
-import com.simplon.macnss.repository.DossierRespository;
-import com.simplon.macnss.security.HashWithSalt;
+import com.simplon.macnss.repository.DossierRepository;
 import com.simplon.macnss.service.AgentServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.simplon.macnss.service.PatientServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class RegisterController {
 
-    private final AgentServiceImpl agentServiceImpl;
-    final
-    DossierRespository dossierRespository;
+    private final
+    AgentServiceImpl agentServiceImpl;
+    private final
+    DossierRepository dossierRepository;
 
-    public RegisterController(DossierRespository dossierRespository , AgentServiceImpl agentServiceImpl) {
-        this.dossierRespository = dossierRespository;
+    private final PatientServiceImpl patientServiceImpl;
+
+    public RegisterController(DossierRepository dossierRepository, AgentServiceImpl agentServiceImpl, PatientServiceImpl patientServiceImpl) {
+        this.dossierRepository = dossierRepository;
         this.agentServiceImpl = agentServiceImpl;
+        this.patientServiceImpl = patientServiceImpl;
     }
 
     @GetMapping("/register")
@@ -36,10 +39,19 @@ public class RegisterController {
         if (result.hasErrors()) {
             return "register";
         }
-        // get the agent passord and hash it
-        String password = agent.getPassword();
-        agent.setPassword(HashWithSalt.hashPassword(password));
         agentServiceImpl.save(agent);
+        return "redirect:/";
+    }
+
+    @PostMapping("/register/patient")
+    public String register(@Validated @ModelAttribute Patient patient, BindingResult result) {
+        if (result.hasErrors()) {
+            return "register";
+        }
+        // generate random patientNumber and check if it's unique
+        Long patientNumber = patientServiceImpl.generatePatientNumber();
+        patient.setPatientNumber(patientNumber);
+        patientServiceImpl.save(patient);
         return "redirect:/";
     }
 }

@@ -25,7 +25,7 @@ public class Dossier {
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "dossier_medication",
-            joinColumns = {@JoinColumn(name = "dossier_id")},
+            joinColumns = { @JoinColumn(name = "dossier_id") },
             inverseJoinColumns = { @JoinColumn(name = "medication_id") }
     )
     private List<Medication> medications;

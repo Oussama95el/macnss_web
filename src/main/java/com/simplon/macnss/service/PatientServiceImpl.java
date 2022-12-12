@@ -26,15 +26,25 @@ public class PatientServiceImpl {
         return patientRepository.findPatientByPatientNumber(patientNumber);
     }
 
-    public boolean checkPatientEmail(String email) {
-        return patientRepository.findPatientByEmail(email) != null;
+    public Patient checkPatientEmail(String email) {
+        return patientRepository.findPatientByEmail(email);
     }
 
     public boolean checkPatientPassword(Patient formPatient) {
-        Patient patient = patientRepository.findPatientByEmail(formPatient.getEmail());
-        return HashWithSalt.checkPassword(formPatient.getPassword(), patient.getPassword());
+        if (formPatient != null) {
+            Patient patient = patientRepository.findPatientByEmail(formPatient.getEmail());
+            return HashWithSalt.checkPassword(formPatient.getPassword(), patient.getPassword());
+        }
+        return false;
     }
 
 
+    public Long generatePatientNumber() {
+        long patientNumber = (long) (Math.random() * 1000000000);
+        while (patientRepository.findPatientByPatientNumber(patientNumber) != null) {
+            patientNumber = (long) (Math.random() * 1000000000);
+        }
+        return patientNumber;
+    }
 }
 

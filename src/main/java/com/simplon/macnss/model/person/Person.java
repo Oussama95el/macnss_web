@@ -1,6 +1,7 @@
 package com.simplon.macnss.model.person;
 
 import jakarta.persistence.*;
+import org.jetbrains.annotations.NotNull;
 
 @MappedSuperclass
 public class Person {
@@ -19,6 +20,7 @@ public class Person {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @org.springframework.data.annotation.Transient
     private String userType;
 
     public String getUserType() {

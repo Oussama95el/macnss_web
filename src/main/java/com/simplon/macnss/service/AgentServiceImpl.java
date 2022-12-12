@@ -21,14 +21,18 @@ public class AgentServiceImpl  {
         agentRepository.save(agent);
     }
 
-    public boolean checkAgentEmail(Agent formAgent) {
-        Agent agent = agentRepository.findAgentByEmail(formAgent.getEmail());
-        return agent != null;
+    public Agent findAgentByEmail(String email) {
+        return agentRepository.findAgentByEmail(email);
     }
 
-    public boolean checkAgentPassword(Agent formAgent) {
-        Agent agent = agentRepository.findAgentByEmail(formAgent.getEmail());
-        return HashWithSalt.checkPassword(formAgent.getPassword(), agent.getPassword());
+    public boolean checkAgentPassword(Agent agent, String password) {
+        if (agent != null) {
+            return HashWithSalt.checkPassword(password, agent.getPassword());
+        }
+        return false;
     }
+
+
+
 
 }
