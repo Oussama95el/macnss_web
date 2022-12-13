@@ -30,7 +30,7 @@ public class Dossier {
     )
     private List<Medication> medications;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "dossier_analysis",
             joinColumns = {@JoinColumn(name = "dossier_id")},
@@ -38,7 +38,7 @@ public class Dossier {
     )
     private List<Analysis> analyses;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "dossier_speciality",
             joinColumns = {@JoinColumn(name = "dossier_id")},
@@ -46,7 +46,7 @@ public class Dossier {
     )
     private List<Speciality> specialities;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "dossier_radio",
             joinColumns = {@JoinColumn(name = "dossier_id")},

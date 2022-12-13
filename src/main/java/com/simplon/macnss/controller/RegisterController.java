@@ -52,6 +52,6 @@ public class RegisterController {
         Long patientNumber = patientServiceImpl.generatePatientNumber();
         patient.setPatientNumber(patientNumber);
         patientServiceImpl.save(patient);
-        return "redirect:/";
+        return "redirect:/dossiers";
     }
 }

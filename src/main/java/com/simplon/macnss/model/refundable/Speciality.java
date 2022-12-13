@@ -17,10 +17,6 @@ public class Speciality extends Refundable{
         this.medicationRefundable = medicationRefundable;
     }
 
-    public Speciality(long id, String name, Float repayment, Boolean medicationRefundable) {
-        super(id, name, repayment);
-        this.medicationRefundable = medicationRefundable;
-    }
 
     public Boolean getMedicationRefundable() {
         return medicationRefundable;
